@@ -1,8 +1,8 @@
 import React from 'react';
-import { 
-  CreditCard, 
-  FileText, 
-  GraduationCap, 
+import {
+  CreditCard,
+  FileText,
+  GraduationCap,
   Smartphone,
   Clock,
   Zap,
@@ -12,10 +12,13 @@ import {
   Sparkles,
   ArrowRight,
   CheckCircle,
-  Send
+  Send,
+  BarChart2,
+  Calendar
 } from 'lucide-react';
 import HomeNavBar from '../components/NavBar';
 import Footer from '../components/Footer';
+import MarketTicker from '../components/MarketTicker';
 
 const ProjetoFuturo = () => {
   const projects = [
@@ -25,7 +28,8 @@ const ProjetoFuturo = () => {
       description: 'Conecte suas contas bancárias e importe transações automaticamente, facilitando o controle financeiro sem esforço manual.',
       status: 'Em breve',
       color: 'from-blue-500 to-cyan-500',
-      progress: 75
+  progress: 75,
+  impact: 'Alta'
     },
     {
       icon: FileText,
@@ -33,7 +37,8 @@ const ProjetoFuturo = () => {
       description: 'Gere relatórios detalhados, gráficos interativos e exporte seus dados para Excel ou PDF, tornando a análise financeira simples e visual.',
       status: 'Planejado',
       color: 'from-emerald-500 to-teal-500',
-      progress: 45
+  progress: 45,
+  impact: 'Média'
     },
     {
       icon: GraduationCap,
@@ -41,7 +46,8 @@ const ProjetoFuturo = () => {
       description: 'Acesse dicas personalizadas, conteúdos educativos e trilhas de aprendizado para evoluir sua saúde financeira.',
       status: 'Em pesquisa',
       color: 'from-amber-500 to-orange-500',
-      progress: 25
+  progress: 25,
+  impact: 'Média'
     },
     {
       icon: Smartphone,
@@ -49,7 +55,8 @@ const ProjetoFuturo = () => {
       description: 'Tenha o PontoFino na palma da mão! Aplicativo para Android e iOS, com notificações e sincronização em tempo real.',
       status: 'Futuro',
       color: 'from-purple-500 to-pink-500',
-      progress: 10
+  progress: 10,
+  impact: 'Baixa'
     }
   ];
 
@@ -70,140 +77,95 @@ const ProjetoFuturo = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
       <HomeNavBar />
-      
-      {/* Hero Section */}
-      <section className="relative py-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20" />
-        <div className="relative max-w-6xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-purple-300 text-sm mb-6">
-            <Rocket className="w-4 h-4" />
-            Projetos Futuros
+
+      <div className="container mx-auto px-4 py-6">
+        <div className="mb-8">
+          <div className="flex items-center justify-between text-sm text-blue-100 mb-3">
+            <div className="font-semibold">Mercado</div>
+            <div className="text-xs text-blue-200">Última atualização: Agora</div>
           </div>
-          
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            O futuro das suas
-            <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent"> finanças começa aqui</span>
-          </h1>
-          
-          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Descubra as inovações que estamos desenvolvendo para revolucionar sua experiência 
-            financeira e tornar o controle do seu dinheiro ainda mais inteligente e eficaz.
-          </p>
+          <MarketTicker items={['IBOV: +0.8%', 'S&P500: +0.4%', 'NASDAQ: +1.2%', 'Dólar: R$5.12', 'Selic: 11.75%']} />
+        </div>
+      </div>
+
+      {/* Hero */}
+      <section className="py-12 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-blue-200 mb-4">
+            <Rocket className="w-4 h-4" /> Roadmap & Projetos
+          </div>
+
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">Inovação com rigor — Roadmap PontoFino</h1>
+          <p className="max-w-3xl mx-auto text-blue-200">Priorizamos segurança, impacto mensurável e velocidade de entrega. Abaixo, você vê o cronograma e o estado atual dos nossos projetos estratégicos.</p>
         </div>
       </section>
 
-      {/* Roadmap */}
-      <section className="py-20 px-4">
+      {/* Roadmap (timeline) */}
+      <section className="py-8 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Nosso <span className="text-purple-400">Roadmap</span>
-            </h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              Acompanhe o cronograma de lançamento das nossas próximas funcionalidades
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-4 gap-6 mb-16">
-            {roadmapItems.map((item, index) => (
-              <div key={index} className="relative">
-                <div className={`bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-xl border border-white/20 p-6 text-center ${item.status === 'active' ? 'ring-2 ring-purple-400' : ''}`}>
-                  <div className={`inline-flex items-center justify-center w-8 h-8 rounded-full mb-4 ${item.status === 'active' ? 'bg-purple-400' : 'bg-gray-600'}`}>
-                    <span className="text-white text-sm font-bold">{index + 1}</span>
+          <div className="relative">
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-px bg-white/6 hidden md:block" />
+            <div className="space-y-8">
+              {roadmapItems.map((item, idx) => (
+                <div key={idx} className={`flex flex-col md:flex-row md:items-center md:justify-between ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                  <div className="md:w-1/2">
+                    <div className={`p-4 bg-white/3 border border-white/8 rounded-md ${item.status === 'active' ? 'ring-1 ring-emerald-400' : ''}`}>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="text-sm text-blue-200">{item.quarter}</div>
+                          <div className="text-lg font-semibold text-white">{item.title}</div>
+                        </div>
+                        <div className={`text-xs px-2 py-1 rounded-full font-medium ${item.status === 'active' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-700/20 text-blue-200'}`}>{item.status}</div>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-white font-semibold mb-2">{item.quarter}</h3>
-                  <p className="text-gray-300 text-sm">{item.title}</p>
+                  <div className="md:w-1/2 md:flex md:justify-center">
+                    <div className="hidden md:block w-6 h-6 rounded-full bg-gradient-to-r from-slate-600 to-slate-700 border border-white/10 mt-2" />
+                  </div>
                 </div>
-                {index < roadmapItems.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-white/20 to-transparent"></div>
-                )}
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Projetos */}
-      <section className="py-20 px-4 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
+      {/* Projects */}
+      <section className="py-12 px-4 bg-gradient-to-r from-purple-900/10 to-blue-900/10">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Próximas <span className="text-purple-400">Funcionalidades</span>
-            </h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              Inovações que vão transformar sua experiência financeira
-            </p>
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-white mb-2">Próximas Funcionalidades</h2>
+            <p className="text-blue-200 max-w-2xl mx-auto">Projetos priorizados por impacto e prontidão técnica.</p>
           </div>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            {projects.map((project, index) => {
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {projects.map((project, i) => {
               const Icon = project.icon;
               return (
-                <div key={index} className="group">
-                  <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-xl border border-white/20 p-8 hover:from-white/15 hover:to-white/10 transition-all duration-300 hover:-translate-y-1">
-                    <div className="flex items-start gap-4 mb-6">
-                      <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${project.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                        <Icon className="w-6 h-6 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-2">
-                          <h3 className="text-white font-semibold text-xl">{project.title}</h3>
-                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                            project.status === 'Em breve' ? 'bg-green-500/20 text-green-300' :
-                            project.status === 'Planejado' ? 'bg-blue-500/20 text-blue-300' :
-                            project.status === 'Em pesquisa' ? 'bg-yellow-500/20 text-yellow-300' :
-                            'bg-purple-500/20 text-purple-300'
-                          }`}>
-                            {project.status}
-                          </span>
-                        </div>
-                        <p className="text-gray-300 leading-relaxed mb-4">{project.description}</p>
-                        
-                        {/* Progress Bar */}
-                        <div className="mb-2">
-                          <div className="flex justify-between text-sm text-gray-400 mb-1">
-                            <span>Progresso</span>
-                            <span>{project.progress}%</span>
-                          </div>
-                          <div className="w-full bg-gray-700 rounded-full h-2">
-                            <div 
-                              className={`h-2 rounded-full bg-gradient-to-r ${project.color} transition-all duration-500`}
-                              style={{ width: `${project.progress}%` }}
-                            ></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Features em Desenvolvimento */}
-      <section className="py-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Recursos <span className="text-purple-400">Inovadores</span>
-            </h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              Tecnologias avançadas que estamos implementando
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <div key={index} className="group">
-                  <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-xl border border-white/20 p-6 text-center hover:from-white/15 hover:to-white/10 transition-all duration-300 hover:-translate-y-1">
-                    <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div key={i} className="p-6 bg-white/4 border border-white/10 rounded-lg">
+                  <div className="flex items-start gap-4">
+                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${project.color} flex items-center justify-center`}> 
                       <Icon className="w-6 h-6 text-white" />
                     </div>
-                    <h3 className="text-white font-semibold">{feature.title}</h3>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-lg font-semibold text-white">{project.title}</h3>
+                        <div className="text-xs text-blue-200">Impacto: <span className="font-medium text-white">{project.impact}</span></div>
+                      </div>
+                      <p className="text-blue-200 mt-2 mb-3">{project.description}</p>
+
+                      <div className="text-sm text-blue-200 flex items-center justify-between mb-2">
+                        <div>Progresso</div>
+                        <div className="font-medium text-white">{project.progress}%</div>
+                      </div>
+                      <div className="w-full bg-gray-700 rounded-full h-2 mb-2">
+                        <div className={`h-2 rounded-full bg-gradient-to-r ${project.color}`} style={{ width: `${project.progress}%` }} />
+                      </div>
+
+                      <div className="flex items-center gap-3 mt-3">
+                        <a href="#" className="text-sm text-blue-100 underline">Ver detalhes</a>
+                        <button className="ml-auto bg-slate-800 hover:bg-slate-700 text-white px-3 py-1 rounded-md text-sm">Notificar-me</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               );
@@ -212,62 +174,55 @@ const ProjetoFuturo = () => {
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="py-20 px-4 bg-gradient-to-r from-blue-900/20 to-purple-900/20">
+      {/* Features */}
+      <section className="py-12 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-white mb-2">Recursos Estratégicos</h2>
+            <p className="text-blue-200 max-w-2xl mx-auto">Tecnologias e automações que suportam escala e robustez operacional.</p>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-6">
+            {features.map((f, idx) => {
+              const Icon = f.icon;
+              return (
+                <div key={idx} className="p-4 bg-white/3 border border-white/8 rounded-md text-center">
+                  <div className="w-12 h-12 mx-auto mb-3 rounded-lg bg-gradient-to-r from-slate-700 to-slate-600 flex items-center justify-center">
+                    <Icon className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-sm font-semibold text-white">{f.title}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-12 px-4 bg-gradient-to-r from-blue-900/10 to-purple-900/10">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-white/20 p-12 text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 mb-6">
-              <Sparkles className="w-8 h-8 text-white" />
+          <div className="p-6 bg-white/5 border border-white/8 rounded-lg text-center">
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 mb-4">
+              <Sparkles className="w-6 h-6 text-white" />
             </div>
-            
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Tem uma ideia <span className="text-purple-400">incrível?</span>
-            </h2>
-            
-            <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-              Sua sugestestão pode ser o próximo grande recurso do PontoFino! 
-              Envie suas ideias e ajude-nos a construir o futuro das finanças digitais.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a 
-                href="mailto:contato@pontofino.com"
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 flex items-center gap-2"
-              >
-                <Mail className="w-5 h-5" />
-                Enviar Sugestão
-              </a>
-              
-              <button className="border border-white/20 hover:bg-white/10 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 flex items-center gap-2">
-                <Send className="w-5 h-5" />
-                Feedback
-              </button>
+            <h3 className="text-xl font-semibold text-white mb-2">Tem uma ideia relevante para o mercado?</h3>
+            <p className="text-blue-200 mb-4">Envie sua proposta. Projetos com validação recebem prioridade no roadmap.</p>
+            <div className="flex gap-3 justify-center">
+              <a href="mailto:contato@pontofino.com" className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-md">Enviar sugestão</a>
+              <a href="#" className="border border-white/10 text-white px-4 py-2 rounded-md">Ver roadmap completo</a>
             </div>
           </div>
         </div>
       </section>
 
       {/* Newsletter */}
-      <section className="py-20 px-4">
+      <section className="py-12 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Fique por dentro das <span className="text-purple-400">novidades</span>
-          </h2>
-          <p className="text-gray-300 text-lg mb-8">
-            Estamos sempre inovando para entregar a melhor experiência financeira. 
-            Seja o primeiro a saber sobre nossos lançamentos!
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input 
-              type="email" 
-              placeholder="Seu melhor e-mail"
-              className="flex-1 px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400"
-            />
-            <button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 flex items-center gap-2 justify-center">
-              Inscrever-se
-              <ArrowRight className="w-4 h-4" />
-            </button>
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">Receba atualizações do roadmap</h2>
+          <p className="text-blue-200 mb-4">Inscreva-se para receber notificações quando um projeto avançar de fase.</p>
+          <div className="flex max-w-md mx-auto gap-2">
+            <input type="email" placeholder="Seu e-mail" className="flex-1 px-3 py-2 rounded-md bg-white/5 border border-white/8 text-white placeholder-blue-300" />
+            <button className="bg-blue-600 px-4 py-2 rounded-md text-white">Inscrever</button>
           </div>
         </div>
       </section>

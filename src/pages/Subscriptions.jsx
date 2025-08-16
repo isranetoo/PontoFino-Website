@@ -1,134 +1,120 @@
 import React, { useState } from 'react';
 import HomeNavBar from '../components/NavBar';
 import Footer from '../components/Footer';
+import MarketTicker from '../components/MarketTicker';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
-import { CheckIcon } from 'lucide-react';
+import { CheckIcon, BarChart2, Star } from 'lucide-react';
 
 export default function Subscriptions() {
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const [billing, setBilling] = useState('monthly'); // 'monthly' | 'annual'
 
   const plans = [
     {
       id: 'basic',
       name: 'Plano Básico',
-      price: 'Gratuito',
-      period: '',
+      monthly: 0,
+      annual: 0,
       description: 'Ideal para começar a controlar suas finanças',
-      features: [
-        'Controle básico de gastos',
-        'Até 50 transações por mês',
-        'Relatórios simples',
-        'Suporte por email'
-      ],
-      color: 'bg-gray-500',
+      features: ['Controle básico de gastos', 'Até 50 transações por mês', 'Relatórios simples', 'Suporte por email'],
       popular: false
     },
     {
       id: 'premium',
       name: 'Plano Premium',
-      price: 'R$ 19,90',
-      period: '/mês',
+      monthly: 19.9,
+      annual: 199.0,
       description: 'Para quem quer controle total das finanças',
-      features: [
-        'Transações ilimitadas',
-        'Categorização automática',
-        'Relatórios avançados',
-        'Metas financeiras',
-        'Simulador de investimentos',
-        'Suporte prioritário',
-        'Sincronização em nuvem'
-      ],
-      color: 'bg-blue-600',
+      features: ['Transações ilimitadas', 'Categorização automática', 'Relatórios avançados', 'Metas financeiras', 'Simulador de investimentos', 'Suporte prioritário', 'Sincronização em nuvem'],
       popular: true
     },
     {
       id: 'business',
       name: 'Plano Empresarial',
-      price: 'R$ 49,90',
-      period: '/mês',
+      monthly: 49.9,
+      annual: 499.0,
       description: 'Perfeito para pequenas empresas e empreendedores',
-      features: [
-        'Tudo do Plano Premium',
-        'Múltiplos usuários (até 10)',
-        'Controle de fluxo de caixa',
-        'Relatórios empresariais',
-        'API de integração',
-        'Suporte 24/7',
-        'Consultoria financeira mensal'
-      ],
-      color: 'bg-purple-600',
+      features: ['Tudo do Plano Premium', 'Múltiplos usuários (até 10)', 'Controle de fluxo de caixa', 'Relatórios empresariais', 'API de integração', 'Suporte 24/7', 'Consultoria financeira mensal'],
       popular: false
     }
   ];
 
+  const formatPrice = (value) => {
+    if (value === 0) return 'Gratuito';
+    return `R$ ${value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+  };
+
   const handleSelectPlan = (planId) => {
     setSelectedPlan(planId);
-    // Aqui você pode adicionar a lógica para processar a assinatura
     console.log(`Plano selecionado: ${planId}`);
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-blue-900 to-[#0096fd]">
       <HomeNavBar />
-      
-      <div className="container mx-auto px-4 py-16 flex-1">
+
+      <div className="container mx-auto px-4 py-12 flex-1">
+        <div className="mb-8">
+          <div className="flex items-center justify-between text-sm text-blue-100 mb-3">
+            <div className="font-semibold">Mercado</div>
+            <div className="text-xs text-blue-200">Última atualização: Agora</div>
+          </div>
+          <MarketTicker items={['IBOV: +0.8%', 'S&P500: +0.4%', 'NASDAQ: +1.2%', 'Dólar: R$5.12', 'Selic: 11.75%']} />
+        </div>
+
         {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Escolha Seu Plano
-          </h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-            Selecione o plano que melhor atende às suas necessidades financeiras.
-            Comece gratuitamente e evolua conforme sua demanda.
-          </p>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+          <div>
+            <h1 className="text-4xl md:text-5xl font-bold text-white">Planos e Preços</h1>
+            <p className="text-blue-200 mt-2">Escolha o plano certo para seu perfil — pessoal ou empresa. Transparência e previsibilidade financeira.</p>
+          </div>
+
+          <div className="mt-4 md:mt-0 flex items-center gap-3">
+            <div className="text-sm text-blue-200">Faturamento</div>
+            <div className="bg-white/5 p-1 rounded-full flex items-center">
+              <button onClick={() => setBilling('monthly')} className={`px-3 py-1 rounded-full text-sm ${billing === 'monthly' ? 'bg-slate-800 text-white' : 'text-blue-200'}`}>Mensal</button>
+              <button onClick={() => setBilling('annual')} className={`px-3 py-1 rounded-full text-sm ${billing === 'annual' ? 'bg-slate-800 text-white' : 'text-blue-200'}`}>Anual</button>
+            </div>
+            <div className="flex items-center text-blue-200 gap-2 px-3">
+              <BarChart2 className="w-5 h-5 text-blue-200" />
+              <span className="text-sm">Economize até 15% pagando anualmente</span>
+            </div>
+          </div>
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
           {plans.map((plan) => (
-            <Card
-              key={plan.id}
-              className={`relative p-8 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl transition-transform hover:scale-105 ${
-                plan.popular ? 'ring-2 ring-yellow-400' : ''
-              }`}
-            >
+            <Card key={plan.id} className={`relative p-6 bg-white/4 border border-white/10 rounded-lg ${plan.popular ? 'ring-1 ring-amber-400' : ''}`}>
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-semibold">
-                    Mais Popular
-                  </span>
+                  <span className="bg-amber-400 text-black px-3 py-1 rounded-full text-sm font-semibold inline-flex items-center gap-2"><Star className="w-4 h-4" /> Mais Popular</span>
                 </div>
               )}
 
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
-                <p className="text-blue-100 mb-4">{plan.description}</p>
-                <div className="flex items-end justify-center mb-4">
-                  <span className="text-4xl font-bold text-white">{plan.price}</span>
-                  <span className="text-blue-100 ml-1">{plan.period}</span>
-                </div>
+              <div className="mb-4">
+                <h3 className="text-xl font-semibold text-white">{plan.name}</h3>
+                <p className="text-sm text-blue-200 mt-1">{plan.description}</p>
               </div>
 
-              <ul className="space-y-4 mb-8">
-                {plan.features.map((feature, index) => (
-                  <li key={index} className="flex items-center text-blue-100">
-                    <CheckIcon className="h-5 w-5 text-green-400 mr-3 flex-shrink-0" />
-                    <span>{feature}</span>
+              <div className="flex items-baseline gap-2 mb-4">
+                <div className="text-3xl font-bold text-white">
+                  {billing === 'monthly' ? formatPrice(plan.monthly) : formatPrice(plan.annual)}
+                </div>
+                <div className="text-sm text-blue-200">{billing === 'monthly' ? '/mês' : '/ano'}</div>
+              </div>
+
+              <ul className="space-y-3 mb-6 text-sm text-blue-100">
+                {plan.features.map((f, idx) => (
+                  <li key={idx} className="flex items-start gap-3">
+                    <CheckIcon className="w-4 h-4 text-emerald-400 mt-1" />
+                    <span>{f}</span>
                   </li>
                 ))}
               </ul>
 
-              <Button
-                onClick={() => handleSelectPlan(plan.id)}
-                className={`w-full py-3 rounded-lg font-semibold transition-all ${
-                  plan.id === 'basic'
-                    ? 'bg-gray-700 hover:bg-gray-600 text-white'
-                    : plan.popular
-                    ? 'bg-yellow-400 hover:bg-yellow-300 text-black'
-                    : 'bg-purple-600 hover:bg-purple-500 text-white'
-                }`}
-              >
+              <Button onClick={() => handleSelectPlan(plan.id)} className={`w-full py-2 rounded-md font-semibold ${plan.id === 'basic' ? 'bg-slate-700 text-white' : plan.popular ? 'bg-amber-400 text-black' : 'bg-slate-800 text-white'}`}>
                 {plan.id === 'basic' ? 'Começar Grátis' : 'Assinar Agora'}
               </Button>
             </Card>
@@ -136,40 +122,23 @@ export default function Subscriptions() {
         </div>
 
         {/* FAQ Section */}
-        <div className="mt-20 max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-white text-center mb-12">
-            Perguntas Frequentes
-          </h2>
-          
+        <div className="mt-8 max-w-4xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-8">Perguntas Frequentes</h2>
+
           <div className="space-y-6">
             <Card className="p-6 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl">
-              <h3 className="text-xl font-semibold text-white mb-3">
-                Posso cancelar minha assinatura a qualquer momento?
-              </h3>
-              <p className="text-blue-100">
-                Sim, você pode cancelar sua assinatura a qualquer momento. Não há taxas de cancelamento
-                e você continuará tendo acesso aos recursos premium até o final do período pago.
-              </p>
+              <h3 className="text-xl font-semibold text-white mb-3">Posso cancelar minha assinatura a qualquer momento?</h3>
+              <p className="text-blue-100">Sim, você pode cancelar sua assinatura a qualquer momento. Não há taxas de cancelamento e você continuará tendo acesso aos recursos premium até o final do período pago.</p>
             </Card>
 
             <Card className="p-6 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl">
-              <h3 className="text-xl font-semibold text-white mb-3">
-                Existe período de teste gratuito?
-              </h3>
-              <p className="text-blue-100">
-                O plano básico é gratuito para sempre. Para os planos Premium e Empresarial,
-                oferecemos 7 dias de teste gratuito para você experimentar todos os recursos.
-              </p>
+              <h3 className="text-xl font-semibold text-white mb-3">Existe período de teste gratuito?</h3>
+              <p className="text-blue-100">O plano básico é gratuito para sempre. Para os planos Premium e Empresarial, oferecemos 7 dias de teste gratuito para você experimentar todos os recursos.</p>
             </Card>
 
             <Card className="p-6 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl">
-              <h3 className="text-xl font-semibold text-white mb-3">
-                Como funciona o suporte técnico?
-              </h3>
-              <p className="text-blue-100">
-                Oferecemos suporte por email para todos os planos. Usuários Premium têm suporte
-                prioritário, e usuários do plano Empresarial têm acesso ao suporte 24/7.
-              </p>
+              <h3 className="text-xl font-semibold text-white mb-3">Como funciona o suporte técnico?</h3>
+              <p className="text-blue-100">Oferecemos suporte por email para todos os planos. Usuários Premium têm suporte prioritário, e usuários do plano Empresarial têm acesso ao suporte 24/7.</p>
             </Card>
           </div>
         </div>

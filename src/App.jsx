@@ -9,7 +9,7 @@ import FutureProjects from './components/FutureProjects';
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-blue-900 to-[#0096fd]">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-[#0a1833] via-[#101c2c] to-[#0a1833]">
       <NavBar />
       <div className="container mx-auto px-3 sm:px-6 md:px-10 py-6 sm:py-10 md:py-16 flex-1 w-full">
         <HeroSection />
