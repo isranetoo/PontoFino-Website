@@ -31,7 +31,7 @@ export default function PlatformInfo() {
   ];
 
   const handleStartNow = () => {
-    navigate('/register');
+    window.location.href = 'https://app.pontofino.com';
   };
 
   const handleLearnMore = () => {

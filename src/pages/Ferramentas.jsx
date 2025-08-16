@@ -9,7 +9,7 @@ import { WalletIcon, TargetIcon, TrendingUpIcon, CheckIcon, ShieldCheckIcon, Lay
 const tools = [
 	{
 		title: 'Gestão de Orçamento',
-		route: '/orcamento',
+		route: 'https://app.pontofino.com',
 		icon: WalletIcon,
 		color: 'bg-blue-500',
 		desc: 'Controle total do seu dinheiro! Defina limites, monitore receitas e despesas em tempo real, visualize gráficos dinâmicos e receba alertas inteligentes para nunca sair do seu planejamento.',
@@ -23,7 +23,7 @@ const tools = [
 	},
 	{
 		title: 'Metas Financeiras',
-		route: '/orcamento/metas',
+		route: 'https://app.pontofino.com',
 		icon: TargetIcon,
 		color: 'bg-green-500',
 		desc: 'Transforme sonhos em conquistas! Crie metas personalizadas, acompanhe o progresso com gráficos motivadores e receba dicas para acelerar seus resultados.',
@@ -32,12 +32,12 @@ const tools = [
 			'Dicas personalizadas',
 			'Notificações de conquistas',
 		],
-		available: false,
+		available: true,
 		delay: 0.2,
 	},
 	{
 		title: 'Simulador de Investimentos',
-		route: '/simulador-investimentos',
+		route: 'https://app.pontofino.com',
 		icon: TrendingUpIcon,
 		color: 'bg-yellow-500',
 		desc: 'Descubra o poder dos seus investimentos! Simule cenários, compare rentabilidades e veja como seu dinheiro pode crescer ao longo do tempo.',

@@ -7,7 +7,7 @@ export default function HeroSection() {
   const navigate = useNavigate();
 
   const handleGetStarted = () => {
-    navigate('/register');
+    window.location.href = 'https://app.pontofino.com';
   };
 
   const handleWatchDemo = () => {

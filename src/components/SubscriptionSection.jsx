@@ -26,7 +26,7 @@ export default function SubscriptionSection() {
   };
 
   const handleStartFree = () => {
-    navigate('/register');
+    window.location.href = 'https://app.pontofino.com';
   };
 
   return (

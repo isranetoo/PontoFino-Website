@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const tools = [
   {
     title: 'Gestão de Orçamento',
-    route: '/orcamento',
+    route: '/ferramentas',
     icon: WalletIcon,
     desc: 'Defina limites de gastos, acompanhe receitas e despesas em tempo real.',
     color: 'bg-blue-500',
@@ -15,7 +15,7 @@ const tools = [
   },
   {
     title: 'Metas Financeiras',
-    route: '/orcamento/metas',
+    route: '/ferramentas',
     icon: TargetIcon,
     desc: 'Crie, edite e monitore metas para alcançar seus sonhos financeiros.',
     color: 'bg-green-500',
@@ -23,7 +23,7 @@ const tools = [
   },
   {
     title: 'Simulador de Investimentos',
-    route: '/simulador-investimentos',
+    route: '/ferramentas',
     icon: TrendingUpIcon,
     desc: 'Simule diferentes cenários de investimento e acompanhe seus rendimentos.',
     color: 'bg-yellow-500',
